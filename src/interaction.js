@@ -9,21 +9,21 @@
  * Adds controls to rotate vector features.
  * Writes out total angle in radians (positive is counter-clockwise) to property for each feature.
  */
-import PointerInteraction from 'ol/interaction/Pointer'
-import Collection from 'ol/Collection'
-import VectorLayer from 'ol/layer/Vector'
-import VectorSource from 'ol/source/Vector'
-import Feature from 'ol/Feature'
-import Point from 'ol/geom/Point'
-import Polygon from 'ol/geom/Polygon'
-import GeometryCollection from 'ol/geom/GeometryCollection'
-import Style from 'ol/style/Style'
-import RegularShape from 'ol/style/RegularShape'
-import Stroke from 'ol/style/Stroke'
-import Fill from 'ol/style/Fill'
-import Text from 'ol/style/Text'
-import {getCenter as getExtentCenter} from 'ol/extent'
-import { always, mouseOnly } from 'ol/events/condition';
+import PointerInteraction from 'ol/interaction/pointer'
+import Collection from 'ol/collection'
+import VectorLayer from 'ol/layer/vector'
+import VectorSource from 'ol/source/vector'
+import Feature from 'ol/feature'
+import Point from 'ol/geom/point'
+import Polygon from 'ol/geom/polygon'
+import GeometryCollection from 'ol/geom/geometrycollection'
+import Style from 'ol/style/style'
+import RegularShape from 'ol/style/regularshape'
+import Stroke from 'ol/style/stroke'
+import Fill from 'ol/style/fill'
+import Text from 'ol/style/text'
+import olExtent from 'ol/extent'
+import condition from 'ol/events/condition';
 import { assert, identity, includes, isArray } from './util'
 import RotateFeatureEvent, { RotateFeatureEventType } from './event'
 import { mouseActionButton } from './shim'
@@ -88,7 +88,7 @@ export default class RotateFeatureInteraction extends PointerInteraction {
      * @private
      * @type {module:ol/events/condition~Condition}
      */
-    this.condition_ = options.condition ? options.condition : always;
+    this.condition_ = options.condition ? options.condition : condition.always;
     /**
      * @type {Collection<Feature>}
      * @private
@@ -437,7 +437,7 @@ export default class RotateFeatureInteraction extends PointerInteraction {
  * @private
  */
 function handleDownEvent (evt) {
-  if (!mouseOnly(evt)) {
+  if (!condition.mouseOnly(evt)) {
     return false;
   }
 
@@ -700,5 +700,5 @@ function getFeaturesCentroid (features) {
   features = features instanceof Collection ? features.getArray() : features
   if (!features.length) return
 
-  return getExtentCenter(getFeaturesExtent(features))
+  return olExtent.getCenter(getFeaturesExtent(features))
 }

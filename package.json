@@ -34,7 +34,7 @@
   "homepage": "https://ghettovoice.github.io/ol-rotate-feature/",
   "dependencies": {},
   "peerDependencies": {
-    "ol": ">=5.0"
+    "ol": ">=4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

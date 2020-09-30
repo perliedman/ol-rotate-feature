@@ -2,7 +2,7 @@
   "name": "ol-rotate-feature",
   "version": "2.2.1",
   "description": "Rotate vector features interaction for OpenLayers",
-  "main": "dist/bundle.js",
+  "main": "dist/bundle.es.js",
   "module": "dist/bundle.es.js",
   "scripts": {
     "build-umd": "cross-env BABEL_ENV=umd NODE_ENV=production rollup -c build/rollup.umd.config.js",
